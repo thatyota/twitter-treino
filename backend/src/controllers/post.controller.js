@@ -3,16 +3,18 @@ import Post from "../models/post.model.js";
 import { populate } from "dotenv";
 import User from "../models/user.model.js";
 import { getAuth } from "@clerk/express";
-import cloudinary from "../config/cloudinary.js "
+import cloudinary from "../config/cloudinary.js"
+import Notification from "../models/notification.model.js";
+import comment from "../models/comment.model.js";
 
 
 
 export const getPosts = asyncHandler (async (req, res) => {
     //try to find all the posts
    const posts = await Post.find()
-     sort({ createdAt: -1})
-     populate("user", "UserName FirstName LastName ProfilePicture")
-     populate({
+     .sort({ createdAt: -1})
+     .populate("user", "UserName FirstName LastName ProfilePicture")
+     .populate({
         path: "comments",
         populate:{
             path: "user",
@@ -85,7 +87,7 @@ export const createPost = asyncHandler(async (req,res) => {
     if (imageFile) {
         try {
          //convert buffer to base64 for cloudinary
-         const base64Image = `data:${imageFile.mimeType};base64,${imageFile.buffer.toString(
+         const base64Image = `data:${imageFile.mimetype};base64,${imageFile.buffer.toString(
             "base64"
          )}`;
          
