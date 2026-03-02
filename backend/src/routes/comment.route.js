@@ -13,4 +13,4 @@ router.get("/post/:postId",protectRoute, createComment);
 router.delete("/:commentId", protectRoute, deleteComments);
 
 
-expor
+export default router;
