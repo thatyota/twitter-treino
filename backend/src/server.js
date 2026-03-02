@@ -35,7 +35,11 @@ const startserver = async () => {
   try{
    await connectdb();
     
-   app.listen(ENV.PORT, () => console.log("Server is app and running on PORT:",ENV.PORT));
+
+    //listen for local development
+    if(ENV.NODE_ENV !=="production") {
+      ãpp.listen(ENV.PORT, () => console.log("Server is up and running on PORT:", ENV.PORT));
+    }
 
   } catch (error) {
      console.error("Failed to connect to server", error.message || error); 
@@ -46,3 +50,7 @@ const startserver = async () => {
 };
 
 startserver();
+
+
+//export for vercel
+export default app 
