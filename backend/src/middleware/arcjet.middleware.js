@@ -42,4 +42,5 @@ export const arcjetMiddleware = async (req, res, next) => {
          //allow request to continue if Arcjet fails
          next();
     }
-};
+}; 
+///bhbjhgb
